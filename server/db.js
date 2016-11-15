@@ -2,56 +2,48 @@ var mysql = require('mysql')
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root'
+  password: 'root',
+  database : 'tmc'
 })
 
 // add query functions
 function getAllPlayers(req, res, next) {
-  connection.connect()
   connection.query('select * from player', function (err, rows, fields) {
   if (err) throw err
-    console.log('The solution is: ', rows[0].solution)
-  })
-  connection.end()
+    res.json(rows);
+    //console.log('The solution is: ', rows)
+  });
 }
 
 function getSinglePlayer(req, res, next) {
     var playerID = parseInt(req.params.id);
-    connection.connect()
-    connection.query('select * from player where id = $1', playerID, function (err, rows, fields) {
+    connection.query('select * from player where id = ?', playerID, function (err, rows, fields) {
     if (err) throw err
-      console.log('The solution is: ', rows[0].solution)
-    })
-    connection.end()
+      res.json(rows);
+    });
 }
 
 function createPlayer(req, res, next) {
-  connection.connect()
-  connection.query('insert into player(name, surname, dob) values (${name}, ${surname}, ${dob})', req.query, function (err, rows, fields) {
+  connection.query('insert into player set ?', req.query, function (err, rows, fields) {
   if (err) throw err
-    console.log('The solution is: ', rows[0].solution)
-  })
-  connection.end()
+    res.json(rows);
+  });
 }
 
 function updatePlayer(req, res, next) {
-  connection.connect()
-  connection.query('update player set name=$1, surname=$2, dob=$3 where id=$4',
-    [req.query.name, req.query.surname, req.query.dob, parseInt(req.params.id)], function (err, rows, fields) {
+  var playerID = parseInt(req.params.id);
+  connection.query('update player set ? where ?',[req.query,parseInt(playerID)], function (err, rows, fields) {
   if (err) throw err
-    console.log('The solution is: ', rows[0].solution)
-  })
-  connection.end()
+    //res.json(rows);
+  });
 }
 
 function deletePlayer(req, res, next) {
-  var playerId = parseInt(req.params.id);
-  connection.connect()
-  connection.query('delete from player where id = $1', playerId, function (err, rows, fields) {
+  var playerId = parseInt(req.params.id)
+  connection.query('delete from player where id = ?', playerId, function (err, rows, fields) {
   if (err) throw err
-    console.log('The solution is: ', rows[0].solution)
-  })
-  connection.end()
+    res.json(rows);
+  });
 }
 
 module.exports = {
