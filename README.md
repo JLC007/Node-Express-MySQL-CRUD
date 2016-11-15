@@ -1,29 +1,22 @@
 # Node-Express-Postgres-CRUD
-Small solution to showcase the basics of NodeJs, ExpressJs and Postgres database operations.
+Small solution to showcase the basics of NodeJs, ExpressJs and MySQL database operations.
 This is a Rest Api solution using basic database create, read, update and delete operations (CRUD)
 
 ## Installation
-Download and install PosgresSql.
+Download and install MySql Database.
 Download the latest NodeJs version
 
 Install expressjs
 ```bash
 $ npm install -g express-generator
 ```
-
-Install [Bluebird](bluebird http://bluebirdjs.com/docs/features.html)
+Install mysql
 ```bash
-$ npm install bluebird
-```
-
-Install pg-promise
-```bash
-$ npm install pg-promise
+$ npm install mysql
 ```
 
 ##Database
-Run the sql script in the application folder using the psql command line to create the database.
-Ensure that psql is configured in the windows environment variables
+Run the sql script in the application folder using the mysql command line to create the database.
 
 ```psql
 psql -U <username> -f player.sql
@@ -32,7 +25,14 @@ psql -U <username> -f player.sql
 ##Configuration
 Ensure that the server/db.js file postgres database connection is updated. Below find the standard configuration
 ```
-var connectionString = 'postgres://postgres:root@localhost:5432/tmc';
+var mysql = require('mysql')
+var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database : 'tmc'
+})
+
 ```
 
 
