@@ -1,4 +1,4 @@
-# Node-Express-Postgres-CRUD
+# Node-Express-MySQLs-CRUD
 Small solution to showcase the basics of NodeJs, ExpressJs and MySQL database operations.
 This is a Rest Api solution using basic database create, read, update and delete operations (CRUD)
 
@@ -18,8 +18,8 @@ $ npm install mysql
 ##Database
 Run the sql script in the application folder using the mysql command line to create the database.
 
-```psql
-psql -U <username> -f player.sql
+```mysql
+mysql -u root -p tmc < player.sql
 ```
 
 ##Configuration
