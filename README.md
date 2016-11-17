@@ -1,4 +1,4 @@
-# Node-Express-MySQLs-CRUD
+# Node-Express-MySQLs-CRUD API
 Small solution to showcase the basics of NodeJs, ExpressJs and MySQL database operations.
 This is a Rest Api solution using basic database create, read, update and delete operations (CRUD)
 
